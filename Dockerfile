@@ -1,12 +1,11 @@
-# Stage 1: Build
-FROM maven:3.9.9-eclipse-temurin-17 AS build
+FROM maven:3.9.3-eclipse-temurin-20 AS build
 WORKDIR /app
-COPY pom.xml .        # Copy only pom.xml first
-COPY src ./src        # Copy source code
+COPY pom.xml .
+COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Stage 2: Run
-FROM eclipse-temurin:17-jdk
+# Use JDK image for runtime
+FROM eclipse-temurin:20-jdk-alpine
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/target/moneymanager-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
