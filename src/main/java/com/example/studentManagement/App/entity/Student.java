@@ -54,8 +54,9 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
+    public String getEmail(){
         return email;
+//        return mail
     }
 
     public void setEmail(String email) {

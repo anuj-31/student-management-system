@@ -22,7 +22,7 @@ public class StudentController {
         return "index";   // this will look for home.html in templates folder
     }
     @GetMapping("/about")
-    public String aboutPage() {
+    public String  aboutPage() {
         return "About";  // matches the about.html template
     }
 
