@@ -2,11 +2,11 @@
 FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# Copy pom.xml and download dependencies (cache friendly)
+# Copy pom.xml and download dependencies
 COPY pom.xml .
 RUN mvn -q dependency:go-offline
 
-# Now copy the source code
+# Copy source code
 COPY src ./src
 
 # Build the application
@@ -21,4 +21,3 @@ COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 9090
 ENTRYPOINT ["java","-jar","app.jar"]
-
